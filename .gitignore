@@ -1,0 +1,10 @@
+# Idea specific files
+
+.idea
+*.iml
+
+out
+
+# Excel tmp files
+
+~*

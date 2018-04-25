@@ -1,0 +1,58 @@
+[
+  {
+  "id" : "4e39354a-3cff-11e8-adb1-ffdc273562b8",
+  "vehicleTypeName" : "CAR",
+  "formulaTypeName" : "CAR_BASIC_FORMULA",
+  "age" : 4,
+  "numberOfMiles" : 12000,
+  "diesel" : false
+  },
+  {
+  "id" : "57187a22-3cff-11e8-a4b7-873ef1d41766",
+  "vehicleTypeName" : "BUS",
+  "formulaTypeName" : "BUS_BASIC_FORMULA",
+  "age" : 4,
+  "numberOfMiles" : 140000,
+  "diesel" : false
+  },
+  {
+  "id" : "5e995eec-3cff-11e8-aa13-6b6265c630eb",
+  "vehicleTypeName" : "TIPPER",
+  "formulaTypeName" : "TIPPER_BASIC_FORMULA",
+  "age" : 10,
+  "numberOfMiles" : 441000,
+  "diesel" : true
+  },
+  {
+  "id" : "6a36c5e6-3cff-11e8-b525-931236b3f498",
+  "vehicleTypeName" : "CAR",
+  "formulaTypeName" : "CAR_BASIC_FORMULA",
+  "age" : 11,
+  "numberOfMiles" : 80000,
+  "diesel" : false
+  },
+  {
+  "id" : "7b282d33-3cff-11e8-da23-5b1137eb1293",
+  "vehicleTypeName" : "CAR",
+  "formulaTypeName" : "CAR_CHRISTMAS_FORMULA",
+  "age" : 4,
+  "numberOfMiles" : 12000,
+  "diesel" : false
+  },
+  {
+  "id" : "1234b27c-3cff-11e8-fa22-eab120eb1462",
+  "vehicleTypeName" : "BUS",
+  "formulaTypeName" : "BUS_CHRISTMAS_FORMULA",
+  "age" : 4,
+  "numberOfMiles" : 140000,
+  "diesel" : false
+  },
+  {
+  "id" : "3c997def-3cff-11e8-c243-14de190f32bc",
+  "vehicleTypeName" : "TIPPER",
+  "formulaTypeName" : "TIPPER_CHRISTMAS_FORMULA",
+  "age" : 10,
+  "numberOfMiles" : 441000,
+  "diesel" : true
+  }
+]
