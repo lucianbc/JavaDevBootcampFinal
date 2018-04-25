@@ -2,18 +2,25 @@ package org.bootcamp.dao;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bootcamp.model.VehicleInfo;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
+@Component
+@Profile("jsondb")
 public final class VehicleInfoJsonFileDao extends VehicleInfoAbstractDao {
 
-    public VehicleInfoJsonFileDao(String filePath) {
+    @Value("${filepath}")
+    private String filePath;
 
-        super();
-
+    @PostConstruct
+    public void init() {
         final File inputFile = new File(filePath);
         final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -27,5 +34,9 @@ public final class VehicleInfoJsonFileDao extends VehicleInfoAbstractDao {
         } catch (Exception ex) {
             throw new IllegalStateException("Cannot create instance of class: " + this.getClass().getSimpleName());
         }
+    }
+
+    public VehicleInfoJsonFileDao() {
+        super();
     }
 }

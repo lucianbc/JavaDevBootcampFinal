@@ -1,15 +1,21 @@
 package org.bootcamp.dao;
 
-import org.bootcamp.model.VehicleInfo;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.bootcamp.model.VehicleInfo;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Iterator;
 
+@Component
+@Profile("exceldb")
 public final class VehicleInfoExcelFileDao extends VehicleInfoAbstractDao {
 
     private static final int EXCEL_INFORMATION_SHEET = 0;
@@ -20,20 +26,19 @@ public final class VehicleInfoExcelFileDao extends VehicleInfoAbstractDao {
     private static final int VEHICLE_MILES = 4;
     private static final int VEHICLE_IS_DIESEL = 5;
 
-    public VehicleInfoExcelFileDao(String filePath) {
+    @Value("${filepath}")
+    private String filePath;
 
-        super();
+    @PostConstruct
+    private void init() {
         final File inputFile = new File(filePath);
 
         try (final InputStream inputStream = new FileInputStream(inputFile)) {
 
             final Workbook workbook = new XSSFWorkbook(inputStream);
             final Sheet dataTypeSheet = workbook.getSheetAt(EXCEL_INFORMATION_SHEET);
-            final Iterator<Row> iterator = dataTypeSheet.iterator();
 
-            while (iterator.hasNext()) {
-
-                final Row currentRow = iterator.next();
+            for (Row currentRow : dataTypeSheet) {
 
                 final VehicleInfo.Builder builder = VehicleInfo.builder();
                 final int age = new Double(currentRow.getCell(VEHICLE_AGE).getNumericCellValue()).intValue();
@@ -50,10 +55,14 @@ public final class VehicleInfoExcelFileDao extends VehicleInfoAbstractDao {
 
                 vehicleInfoMap.put(vehicleInfo.getId(), vehicleInfo);
             }
-
         } catch (Exception ex) {
 
             throw new IllegalStateException("Cannot create instance of class: " + this.getClass().getSimpleName());
         }
+    }
+
+    public VehicleInfoExcelFileDao() {
+
+        super();
     }
 }

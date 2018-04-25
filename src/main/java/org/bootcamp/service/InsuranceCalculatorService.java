@@ -2,16 +2,12 @@ package org.bootcamp.service;
 
 import org.bootcamp.calculator.InsurancePolicyCalculator;
 import org.bootcamp.dao.VehicleInfoDao;
-import org.bootcamp.dao.VehicleInfoJsonFileDao;
 import org.bootcamp.formula.Formula;
 import org.bootcamp.model.VehicleInfo;
 import org.bootcamp.vehicle.Vehicle;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,8 +18,8 @@ public final class InsuranceCalculatorService {
 
     private final VehicleInfoDao dao;
 
-    public InsuranceCalculatorService(@Value("${filepath}") String filePath) {
-        this.dao = new VehicleInfoJsonFileDao(filePath);
+    public InsuranceCalculatorService(VehicleInfoDao dao) {
+        this.dao = dao;
     }
 
     public List<InsuranceCalculationResult> calculateAll() {
@@ -64,10 +60,8 @@ public final class InsuranceCalculatorService {
             final Formula formula = Formula.valueOf(vehicleInfo.getFormulaTypeName());
             final float totalCost = calculator.calculate(vehicle, formula);
 
-            final InsuranceCalculationResult result = new InsuranceCalculationResult(vehicleInfo.getId(),
+            return new InsuranceCalculationResult(vehicleInfo.getId(),
                                                             vehicleInfo.getVehicleTypeName(), totalCost);
-
-            return result;
         }
 
         return null;
@@ -77,13 +71,7 @@ public final class InsuranceCalculatorService {
 
         final List<InsuranceCalculationResult> calculationResults = this.calculateAll();
 
-        for (final Iterator<InsuranceCalculationResult> it = calculationResults.iterator(); it.hasNext();) {
-
-            final InsuranceCalculationResult result = it.next();
-
-            if (result.getCost() <= cost)
-                it.remove();
-        }
+        calculationResults.removeIf(result -> result.getCost() <= cost);
 
         if (calculationResults.isEmpty()) {
 
