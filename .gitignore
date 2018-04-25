@@ -8,3 +8,6 @@ out
 # Excel tmp files
 
 ~*
+
+# Maven builds
+target
