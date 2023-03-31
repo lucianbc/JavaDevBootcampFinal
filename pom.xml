@@ -14,7 +14,7 @@
     <properties>
 
         <project.jackson.version>3.17</project.jackson.version>
-        <project.poi.version>2.9.5</project.poi.version>
+        <project.poi.version>2.12.7.1</project.poi.version>
         <project.java.version>1.8</project.java.version>
         <project.spring.boot.version>2.0.1.RELEASE</project.spring.boot.version>
     </properties>
